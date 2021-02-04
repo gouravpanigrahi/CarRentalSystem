@@ -2,38 +2,55 @@ package com.example.demo.model;
 
 import java.math.BigInteger;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Car {
 
 	@Id
-	private BigInteger CarNo;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+
+	private BigInteger carNo;
 	private String carName;
 	private String carModel;
 	private int seatCapacity;
+	private boolean action;
 	
 	public Car() {
 	}
 
-	public Car(BigInteger carNo, String carName, String carModel, int seatCapacity) {
-		super();
-		CarNo = carNo;
+	public Car(Long id, BigInteger carNo, String carName, String carModel, int seatCapacity, boolean action) {
+		this.id = id;
+		this.carNo = carNo;
 		this.carName = carName;
 		this.carModel = carModel;
 		this.seatCapacity = seatCapacity;
+		this.action = action;
+	}
+
+	public boolean isAction() {
+		return action;
+	}
+
+	public void setAction(boolean action) {
+		this.action = action;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public BigInteger getCarNo() {
-		return CarNo;
+		return carNo;
 	}
 
 	public void setCarNo(BigInteger carNo) {
-		CarNo = carNo;
+		this.carNo = carNo;
 	}
 
 	public String getCarName() {
@@ -62,7 +79,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [CarNo=" + CarNo + ", carName=" + carName + ", carModel=" + carModel + ", seatCapacity="
+		return "Car [CarNo=" + carNo + ", carName=" + carName + ", carModel=" + carModel + ", seatCapacity="
 				+ seatCapacity + "]";
 	}
 
@@ -70,7 +87,7 @@ public class Car {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((CarNo == null) ? 0 : CarNo.hashCode());
+		result = prime * result + ((carNo == null) ? 0 : carNo.hashCode());
 		result = prime * result + ((carModel == null) ? 0 : carModel.hashCode());
 		result = prime * result + ((carName == null) ? 0 : carName.hashCode());
 		result = prime * result + seatCapacity;
@@ -86,10 +103,10 @@ public class Car {
 		if (getClass() != obj.getClass())
 			return false;
 		Car other = (Car) obj;
-		if (CarNo == null) {
-			if (other.CarNo != null)
+		if (carNo == null) {
+			if (other.carNo != null)
 				return false;
-		} else if (!CarNo.equals(other.CarNo))
+		} else if (!carNo.equals(other.carNo))
 			return false;
 		if (carModel == null) {
 			if (other.carModel != null)

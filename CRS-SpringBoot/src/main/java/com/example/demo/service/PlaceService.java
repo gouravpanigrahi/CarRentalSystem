@@ -4,8 +4,10 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.demo.model.Place;
 
+import java.util.List;
+
 public interface PlaceService {
-	public Iterable<Place> viewAllPlace();
+	public List<Place> viewAllPlace();
 
 	public Place viewPlace(String placeCode);
 

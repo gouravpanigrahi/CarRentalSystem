@@ -31,7 +31,7 @@ public class PlaceController {
 		return placeService.viewPlace(placeCode);
 	}
 	@GetMapping("/allPlace")
-	public Iterable<Place> viewAllPlace() {
+	public List<Place> viewAllPlace() {
 		return placeService.viewAllPlace();
 	}
 
@@ -45,8 +45,8 @@ public class PlaceController {
 		placeService.modifyPlace(place);
 	}
 
-	@DeleteMapping("/deletePlace/{id}")
-	public void removePlace(@PathVariable("id") String placeCode) {
+	@DeleteMapping("/deletePlace/{placeCode}")
+	public void removePlace(@PathVariable("placeCode") String placeCode) {
 		placeService.removePlace(placeCode);
 	}
 }

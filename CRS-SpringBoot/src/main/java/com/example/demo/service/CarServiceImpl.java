@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import com.example.demo.exceptions.RecordAlreadyPresentException;
 import com.example.demo.exceptions.RecordNotFoundException;
 import com.example.demo.model.Car;
 
+@Service
 public class CarServiceImpl implements CarService{
 
 	@Autowired
@@ -21,7 +23,7 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public ResponseEntity<?> addCar(Car car) {
 		// TODO Auto-generated method stub
-		Optional<Car> findById = carDao.findById(car.getCarNo());
+		Optional<Car> findById = carDao.findByCarNo(car.getCarNo());
 		try {
 		if (!findById.isPresent()) {
 			carDao.save(car);
@@ -36,7 +38,7 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public Iterable<Car> viewAllCar() {
+	public List<Car> viewAllCar() {
 		// TODO Auto-generated method stub
 		return carDao.findAll();
 	}
@@ -44,9 +46,11 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public Car viewCar(BigInteger carNumber) {
 		// TODO Auto-generated method stub
-		Optional<Car> findById = carDao.findById(carNumber);
-		if (findById.isPresent()) {
-			return findById.get();
+		Optional<Car> car = carDao.findByCarNo(carNumber);
+		System.out.println("car.isPresent()----"+car.get());
+		if (car.isPresent()) {
+			System.out.println("Car----"+car.get());
+			return car.get();
 		}
 		else
 			throw new RecordNotFoundException("Car with number: " + carNumber + " not exists");
@@ -56,7 +60,7 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public Car modifyCar(Car car) {
 		// TODO Auto-generated method stub
-		Optional<Car> findById = carDao.findById(car.getCarNo());
+		Optional<Car> findById = carDao.findByCarNo(car.getCarNo());
 		if (findById.isPresent()) {
 			carDao.save(car);
 		} else
@@ -68,9 +72,9 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public String removeCar(BigInteger carNumber) {
 		// TODO Auto-generated method stub
-		Optional<Car> findById = carDao.findById(carNumber);
-		if (findById.isPresent()) {
-			carDao.deleteById(carNumber);
+		Optional<Car> car = carDao.findByCarNo(carNumber);
+		if (car.isPresent()) {
+			carDao.deleteByCarNo(carNumber);
 			return "Car removed!!";
 		} else
 			throw new RecordNotFoundException("Car with number: " + carNumber + " not exists");

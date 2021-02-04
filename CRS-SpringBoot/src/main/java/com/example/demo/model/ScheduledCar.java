@@ -2,20 +2,17 @@ package com.example.demo.model;
 
 import java.math.BigInteger;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-import com.sun.istack.internal.NotNull;
-
+import com.sun.istack.NotNull;
 
 @Entity
 public class ScheduledCar {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(name = "schedule_car_id")
 	private BigInteger scheduleCarId;
 
@@ -36,12 +33,20 @@ public class ScheduledCar {
 		
 	}
 
-	public ScheduledCar(BigInteger scheduleCarId, Car car, Integer availableSeats, Schedule schedule) {
-		super();
+	public ScheduledCar(Long id, BigInteger scheduleCarId, Car car, Integer availableSeats, Schedule schedule) {
+		this.id = id;
 		this.scheduleCarId = scheduleCarId;
 		this.car = car;
 		this.availableSeats = availableSeats;
 		this.schedule = schedule;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public BigInteger getScheduleCarId() {

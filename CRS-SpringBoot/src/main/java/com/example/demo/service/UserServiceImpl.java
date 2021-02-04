@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.math.BigInteger;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Iterable<User> displayAllUser() {
+	public List<User> displayAllUser() {
 		// TODO Auto-generated method stub
 		return userDao.findAll();
 	}

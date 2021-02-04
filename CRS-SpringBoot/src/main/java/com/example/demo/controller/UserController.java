@@ -1,48 +1,44 @@
 package com.example.demo.controller;
 
 import java.math.BigInteger;
+import java.util.List;
 
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @ComponentScan(basePackages = "com")
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@PostMapping("/createUser")
-	public void addUser(@RequestBody Users newUser) {
+	@PostMapping("/addUser")
+	public void addUser(@RequestBody User user) {
 
-		userService.createUser(newUser);
+		userService.createUser(user);
 	}
 
 	@GetMapping("/readAllUsers")
-	public Iterable<Users> readAllUsers() {
+	public List<User> readAllUsers() {
 
 		return userService.displayAllUser();
 	}
 
 	@PutMapping("/updateUser")
-	public void updateUser(@RequestBody Users updateUser) {
+	public void updateUser(@RequestBody User updateUser) {
 
 		userService.updateUser(updateUser);
 	}
 
-	@GetMapping("/searchUser/{id}")
-	public ResponseEntity<?> searchUserByID(@PathVariable("id") BigInteger userId) {
+	@GetMapping("/searchUser/{userId}")
+	public ResponseEntity<?> searchUserByID(@PathVariable("userId") BigInteger userId) {
 
 		return userService.findUserById(userId);
 	}

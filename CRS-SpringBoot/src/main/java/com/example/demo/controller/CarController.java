@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class CarController {
 	}
 
 	@GetMapping("/allCar")
-	public Iterable<Car> viewAllCar() {
+	public List<Car> viewAllCar() {
 		return carService.viewAllCar();
 	}
 

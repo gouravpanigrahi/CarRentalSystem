@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -35,7 +36,7 @@ public class BookingController {
 	}
 
 	@GetMapping("/readAllBooking")
-	public Iterable<Booking> readAllBookings() {
+	public List<Booking> readAllBookings() {
 
 		return bookingService.displayAllBooking();
 	}
@@ -53,7 +54,7 @@ public class BookingController {
 	}
 
 	@DeleteMapping("/deleteBooking/{id}")
-	public void deleteBookingByID(@PathVariable("id") BigInteger bookingId) {
+	public void deleteBookingByID(@PathVariable("id") BigInteger bookingId) throws Exception {
 
 		bookingService.deleteBooking(bookingId);
 	}

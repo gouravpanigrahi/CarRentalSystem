@@ -4,12 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +14,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "schedule")
 public class Schedule {
-
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(name = "schedule_Id")
 	private BigInteger scheduleId;
 
@@ -41,8 +38,8 @@ public class Schedule {
 		
 	}
 
-	public Schedule(BigInteger scheduleId, Place srcPlace, Place dstnPlace, String deptDateTime, String arrDateTime) {
-		super();
+	public Schedule(Long id, BigInteger scheduleId, Place srcPlace, Place dstnPlace, String deptDateTime, String arrDateTime) {
+		this.id = id;
 		this.scheduleId = scheduleId;
 		this.srcPlace = srcPlace;
 		this.dstnPlace = dstnPlace;
@@ -88,6 +85,14 @@ public class Schedule {
 
 	public void setArrDateTime(String arrDateTime) {
 		this.arrDateTime = arrDateTime;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

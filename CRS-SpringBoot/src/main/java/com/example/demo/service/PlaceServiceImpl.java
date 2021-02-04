@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class PlaceServiceImpl implements PlaceService{
 	 * view all Places
 	 */
 	@Override
-	public Iterable<Place> viewAllPlace() {
+	public List<Place> viewAllPlace() {
 		return placeDao.findAll();
 	}
 
@@ -33,7 +34,7 @@ public class PlaceServiceImpl implements PlaceService{
 	 */
 	@Override
 	public Place viewPlace(String placeCode) {
-		Optional<Place> findById = placeDao.findById(placeCode);
+		Optional<Place> findById = placeDao.findByPlaceCode(placeCode);
 		if (findById.isPresent()) {
 			return findById.get();
 		}
@@ -53,7 +54,7 @@ public class PlaceServiceImpl implements PlaceService{
 	 */
 	@Override
 	public ResponseEntity<?> addPlace(Place place) {
-		Optional<Place> findById = placeDao.findById(place.getPlaceCode());
+		Optional<Place> findById = placeDao.findByPlaceCode(place.getPlaceCode());
 		try {
 		if (!findById.isPresent()) {
 			placeDao.save(place);
@@ -74,7 +75,7 @@ public class PlaceServiceImpl implements PlaceService{
 	 */
 	@Override
 	public Place modifyPlace(Place place) {
-		Optional<Place> findById = placeDao.findById(place.getPlaceCode());
+		Optional<Place> findById = placeDao.findByPlaceCode(place.getPlaceCode());
 		if (findById.isPresent()) {
 			placeDao.save(place);
 		} 
@@ -88,9 +89,9 @@ public class PlaceServiceImpl implements PlaceService{
 	 */
 	@Override
 	public String removePlace(String placeCode) {
-		Optional<Place> findById = placeDao.findById(placeCode);
+		Optional<Place> findById = placeDao.findByPlaceCode(placeCode);
 		if (findById.isPresent()) {
-			placeDao.deleteById(placeCode);
+			placeDao.deleteByPlaceCode(placeCode);
 			return "Place removed";
 		} else
 			throw new RecordNotFoundException("Place with code: " + placeCode + " not exists");

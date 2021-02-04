@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
@@ -13,9 +14,9 @@ public interface BookingService {
 
 	public Booking updateBooking(Booking newBooking);
 
-	public String deleteBooking(BigInteger bookingId);
+	public String deleteBooking(BigInteger bookingId) throws Exception;
 
-	public Iterable<Booking> displayAllBooking();
+	public List<Booking> displayAllBooking();
 
 	public ResponseEntity<?> findBookingById(BigInteger bookingId);
 }

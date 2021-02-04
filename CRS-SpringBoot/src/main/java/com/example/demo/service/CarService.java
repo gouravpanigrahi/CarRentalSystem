@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +10,7 @@ public interface CarService {
 
 	public ResponseEntity<?> addCar(Car car);
 
-	public Iterable<Car> viewAllCar();
+	public List<Car> viewAllCar();
 
 	public Car viewCar(BigInteger carNumber);
 

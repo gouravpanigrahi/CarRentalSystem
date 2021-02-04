@@ -1,51 +1,63 @@
 package com.example.demo.model;
 
 import java.math.BigInteger;
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "BOOKING")
 public class Booking {
 	@Id
-	// @GeneratedValue(strategy=GenerationType.AUTO)
-	private BigInteger bookingId;
-	private String bookingDate;
-	private int noOfPassengers;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 
-	public BigInteger getBookingId() {
-		return bookingId;
+	private BigInteger carNo;
+	private Date bookingDateFrom;
+	private Date bookingDateTo;
+
+	public Booking(Long id, BigInteger carNo, Date bookingDateFrom, Date bookingDateTo) {
+		this.id = id;
+		this.carNo = carNo;
+		this.bookingDateFrom = bookingDateFrom;
+		this.bookingDateTo = bookingDateTo;
 	}
 
-	public void setBookingId(BigInteger bookingId) {
-		this.bookingId = bookingId;
+	public Booking() {
 	}
 
-	public String getBookingDate() {
-		return bookingDate;
+	public Long getId() {
+		return id;
 	}
 
-	public void setBookingDate(String bookingDate) {
-		this.bookingDate = bookingDate;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public int getNoOfPassengers() {
-		return noOfPassengers;
+	public BigInteger getCarNo() {
+		return carNo;
 	}
 
-	public void setNoOfPassengers(int noOfPassengers) {
-		this.noOfPassengers = noOfPassengers;
+	public void setCarNo(BigInteger carNo) {
+		this.carNo = carNo;
+	}
+
+	public Date getBookingDateFrom() {
+		return bookingDateFrom;
+	}
+
+	public void setBookingDateFrom(Date bookingDateFrom) {
+		this.bookingDateFrom = bookingDateFrom;
+	}
+
+	public Date getBookingDateTo() {
+		return bookingDateTo;
+	}
+
+	public void setBookingDateTo(Date bookingDateTo) {
+		this.bookingDateTo = bookingDateTo;
 	}
 }
 

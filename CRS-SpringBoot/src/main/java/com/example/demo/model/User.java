@@ -3,32 +3,49 @@ package com.example.demo.model;
 import java.math.BigInteger;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private Long id;
 
 	private String userType;
-	@Id
 	private BigInteger userId;
 	private String userName;
 	private String userPassword;
 	private BigInteger userPhone;
 	private String userEmail;
-	public User(String userType, BigInteger userId, String userName, String userPassword, BigInteger userPhone,
-			String userEmail) {
-		super();
+	private boolean active;
+	private String roles;
+
+
+	public User(Long id, String userType, BigInteger userId, String userName, String userPassword, BigInteger userPhone, String userEmail, boolean active, String roles) {
+		this.id = id;
 		this.userType = userType;
 		this.userId = userId;
 		this.userName = userName;
 		this.userPassword = userPassword;
 		this.userPhone = userPhone;
 		this.userEmail = userEmail;
+		this.active = active;
+		this.roles = roles;
 	}
-	
+
 	public User()
 	{
 		
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUserType() {
@@ -78,5 +95,35 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", userType='" + userType + '\'' +
+				", userId=" + userId +
+				", userName='" + userName + '\'' +
+				", userPassword='" + userPassword + '\'' +
+				", userPhone=" + userPhone +
+				", userEmail='" + userEmail + '\'' +
+				", active=" + active +
+				", role='" + roles + '\'' +
+				'}';
+	}
 }

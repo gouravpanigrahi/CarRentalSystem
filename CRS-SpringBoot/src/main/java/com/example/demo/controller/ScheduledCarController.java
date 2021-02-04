@@ -28,6 +28,7 @@ import com.example.demo.service.CarService;
 import com.example.demo.service.PlaceService;
 import com.example.demo.service.ScheduledCarService;
 
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/scheduledCar")
@@ -69,7 +70,7 @@ public class ScheduledCarController {
 		try {
 			scheduledCar.setCar(carService.viewCar(scheduledCar.getScheduleCarId()));
 		} catch (RecordNotFoundException e1) {
-			return new ResponseEntity("Flight Not Found", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("Place Not Found", HttpStatus.BAD_REQUEST);
 		}
 		scheduledCar.setSchedule(schedule);
 		scheduledCar.setAvailableSeats(scheduledCar.getCar().getSeatCapacity());
@@ -99,7 +100,7 @@ public class ScheduledCarController {
 	 * Controller for deleting existing Scheduled Cars
 	 */
 	@DeleteMapping("/delete")
-	public String deleteSC(@RequestParam BigInteger carId) throws RecordNotFoundException {
+	public String deleteSC(@RequestParam BigInteger carId) throws Exception {
 		return scheduleCarService.removeScheduledCar(carId);
 	}
 
@@ -107,7 +108,7 @@ public class ScheduledCarController {
 	 * Controller for viewing a Scheduled Car by ID
 	 */
 	@GetMapping("/search")
-	public ResponseEntity<ScheduledCar> viewSC(@RequestParam BigInteger carId) throws ScheduledCarNotFoundException {
+	public ResponseEntity<ScheduledCar> viewSC(@RequestParam BigInteger carId) throws Exception {
 		ScheduledCar searchSCar = scheduleCarService.viewScheduledCar(carId);
 		if (searchSCar == null) {
 			return new ResponseEntity("Car not present", HttpStatus.BAD_REQUEST);

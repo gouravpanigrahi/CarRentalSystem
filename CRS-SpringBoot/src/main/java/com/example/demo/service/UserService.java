@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
@@ -15,7 +16,7 @@ public interface UserService {
 
 	public String deleteUser(BigInteger UserId);
 
-	public Iterable<User> displayAllUser();
+	public List<User> displayAllUser();
 
 	public ResponseEntity<?> findUserById(BigInteger userId);
 }
